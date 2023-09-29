@@ -58,6 +58,14 @@ func (s *offerDriverService) FindAllOffers() ([]*models.OfferDriverModel, error)
 }
 
 func (s *offerDriverService) SearchOffers(to, from, type_ string) ([]*models.OfferDriverModel, error) {
+	if to == "" {
+		res, err := s.db.SearchOneSide(from, type_)
+		if err != nil {
+			return nil, err
+		}
+
+		return res, nil
+	}
 	res, err := s.db.Search(to, from, type_)
 	if err != nil {
 		return nil, err
