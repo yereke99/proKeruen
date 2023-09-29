@@ -156,7 +156,7 @@ func (pool OfferUserDB) Search(from, to, type_ string) ([]*models.OfferUserModel
 }
 
 func (pool OfferUserDB) SearchA(from, type_ string) ([]*models.OfferUserModel, error) {
-	q := `Select * from offer_driver WHERE locationFrom=$1`
+	q := `Select * from offer_driver WHERE locationFrom=$1 ORDER BY id DESC`
 	qu := `Select ava from driver where id=$1`
 
 	rows, err := pool.DB.Query(context.Background(), q, from)
