@@ -60,7 +60,7 @@ func (pool OfferUserDB) Create(id int, offer dto.OfferRequest) error {
 }
 
 func (pool OfferUserDB) MyOffer(id int64) ([]*dto.OfferResponseUser, error) {
-	q := `Select id, comment, locationFrom, locationTo, price, type,  customer From offer_user WHERE customer=$1`
+	q := `Select id, comment, locationFrom, locationTo, price, type,  customer From offer_user WHERE customer=$1 ORDER BY id DESC`
 
 	rows, err := pool.DB.Query(context.Background(), q, id)
 
