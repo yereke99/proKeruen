@@ -57,7 +57,7 @@ func (pool OfferDriverDB) Create(id int, offer dto.OfferRequest) error {
 }
 
 func (pool OfferDriverDB) MyOffer(id int64) ([]*dto.OfferResponseDriver, error) {
-	q := `Select id, comment, locationFrom, locationTo, price, driver  From offer_driver WHERE driver=$1`
+	q := `Select id, comment, locationFrom, locationTo, price, driver  From offer_driver WHERE driver=$1 ORDER BY id DESC`
 
 	rows, err := pool.DB.Query(context.Background(), q, id)
 
