@@ -79,6 +79,8 @@ func (pool OrderDB) GetOrders(driverId int64) ([]*dto.OrderResponse, error) {
 		return nil, err
 	}
 
+	c := help.Choose(carType)
+	
 	var orders []*dto.OrderResponse
 
 	for rows.Next() {
@@ -100,7 +102,7 @@ func (pool OrderDB) GetOrders(driverId int64) ([]*dto.OrderResponse, error) {
 			return nil, err
 		}
 
-		if order.Type == carType {
+		if help.Choose(order.Type) == c {
 			orders = append(orders, order)
 		}
 
