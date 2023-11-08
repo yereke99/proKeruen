@@ -150,7 +150,7 @@ func (pool OfferDriverDB) Search(to, from, type_ string) ([]*models.OfferDriverM
 }
 
 func (pool OfferDriverDB) SearchOneSide(from, type_ string) ([]*models.OfferDriverModel, error) {
-	q := `Select * from offer_user WHERE locationFrom=$1`
+	q := `Select * from offer_user WHERE locationFrom=$1 ORDER BY id DESC`
 
 	qu := `Select ava from customer where id=$1`
 
