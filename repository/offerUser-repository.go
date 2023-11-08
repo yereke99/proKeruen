@@ -95,7 +95,7 @@ func (pool OfferUserDB) MyOffer(id int64) ([]*dto.OfferResponseUser, error) {
 
 // here ou must to change!
 func (pool OfferUserDB) FindAllOffers() ([]*dto.OfferResponseUser, error) {
-	q := `Select * From offer_user`
+	q := `Select * From offer_user ORDER BY id DESC`
 	rows, err := pool.DB.Query(context.Background(), q)
 	if err != nil {
 		return nil, err
