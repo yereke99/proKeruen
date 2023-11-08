@@ -90,7 +90,7 @@ func (pool OfferDriverDB) MyOffer(id int64) ([]*dto.OfferResponseDriver, error) 
 }
 
 func (pool OfferDriverDB) FindAllOffers() ([]*models.OfferDriverModel, error) {
-	q := `Select * From offer_driver`
+	q := `Select * From offer_driver ORDER BY id DESC`
 	rows, err := pool.DB.Query(context.Background(), q)
 	if err != nil {
 		return nil, err
