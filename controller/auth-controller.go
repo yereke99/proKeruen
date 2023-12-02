@@ -55,6 +55,7 @@ func (c *authController) ValidatorSMS(ctx *gin.Context) {
 		)
 		return
 	}
+
 	code, _ := strconv.Atoi(checkCode.Code)
 	ok, err := c.AuthService.ValidateSMS(checkCode.PhoneNumber, code)
 

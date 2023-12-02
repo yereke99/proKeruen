@@ -149,10 +149,12 @@ func (pool Database) Insert(contact string, code int) error {
 }
 
 func (pool Database) CreateCode(contact string, code int) error {
-	q := `Select COUNT(*) FROM sms_cache WHERE contact = $1`
-	var count int
-	err := pool.DB.QueryRow(context.Background(), q, contact).Scan(&count)
 
+	q := `Select COUNT(*) FROM sms_cache WHERE contact = $1`
+
+	var count int
+
+	err := pool.DB.QueryRow(context.Background(), q, contact).Scan(&count)
 	if err != nil {
 		return err
 	}
@@ -172,6 +174,7 @@ func (pool Database) CreateCode(contact string, code int) error {
 			return err
 		}
 	}
+
 	return nil
 }
 
@@ -183,10 +186,10 @@ func (pool Database) ValidateSMS(contact string) (int, error) {
 	var code int
 
 	err := row.Scan(&code)
-
 	if err != nil {
 		return 0, err
 	}
+
 	return code, nil
 }
 
@@ -206,11 +209,10 @@ func (pool Database) All() ([]*models.SMS, error) {
 	q := `Select contact,code From sms_cache`
 
 	rows, err := pool.DB.Query(context.Background(), q)
-	defer rows.Close()
-
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	var all []*models.SMS
 
@@ -224,9 +226,7 @@ func (pool Database) All() ([]*models.SMS, error) {
 
 		all = append(all, sms)
 	}
-	for _, v := range all {
-		fmt.Println(*v)
-	}
+
 	return all, nil
 }
 
