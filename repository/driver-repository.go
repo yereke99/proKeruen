@@ -223,7 +223,7 @@ func (pool DriverDB) UpdateDriver(model models.DriverModel) (*models.DriverModel
 	return u, nil
 }
 
-func (pool DriverDB) Delete(id int) error {
+func (pool DriverDB) Delete(id int64) error {
 	q := `Delete From driver WHERE id=$1`
 	_, err := pool.DB.Exec(context.Background(), q, id)
 	if err != nil {

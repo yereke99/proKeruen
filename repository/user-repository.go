@@ -128,7 +128,7 @@ func (pool UserDB) Update(update models.UserModel) (*models.UserModel, error) {
 
 }
 
-func (pool UserDB) Delete(id int) error {
+func (pool UserDB) Delete(id int64) error {
 	q := `Delete From customer WHERE id=$1;`
 
 	_, err := pool.DB.Exec(context.Background(), q, id)

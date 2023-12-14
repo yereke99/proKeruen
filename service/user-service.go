@@ -9,7 +9,7 @@ type UserService interface {
 	Create(data models.UserRegister) (*models.UserModel, error)
 	CheckTokenUser(token string) (*models.UserModel, error)
 	Update(user models.UserModel) (*models.UserModel, error)
-	Delete(id int) error
+	Delete(id int64) error
 }
 
 type userService struct {
@@ -50,6 +50,6 @@ func (s *userService) Update(user models.UserModel) (*models.UserModel, error) {
 	return res, err
 }
 
-func (s *userService) Delete(id int) error {
+func (s *userService) Delete(id int64) error {
 	return s.db.Delete(id)
 }

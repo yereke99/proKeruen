@@ -97,16 +97,18 @@ func (c *userController) Update(ctx *gin.Context) {
 }
 
 func (c *userController) Delete(ctx *gin.Context) {
-	id, _ := strconv.Atoi(ctx.Param("id"))
+	idStr := ctx.Param("id")
 
-	/*
-		if err := c.UserService.Delete(id); err != nil {
-			ctx.JSON(http.StatusConflict, gin.H{"message": "error in delete service."})
-			return
-		}
-	*/
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Invalid ID"})
+		return
+	}
 
-	id += 1
+	if err := c.UserService.Delete(id); err != nil {
+		ctx.JSON(http.StatusConflict, gin.H{"message": "error in delete service."})
+		return
+	}
 
 	ctx.JSON(200, "deleted")
 }

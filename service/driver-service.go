@@ -10,7 +10,7 @@ type DriverService interface {
 	CreateDriver(data models.DriverRegister) (*models.DriverModel, error)
 	GetProfile(token string) (*models.DriverModel, error)
 	UpdateService(update models.DriverModel) (*models.DriverModel, error)
-	Delete(id int) error
+	Delete(id int64) error
 }
 
 type driverService struct {
@@ -53,6 +53,6 @@ func (s *driverService) UpdateService(update models.DriverModel) (*models.Driver
 	return res, nil
 }
 
-func (s *driverService) Delete(id int) error {
+func (s *driverService) Delete(id int64) error {
 	return s.db.Delete(id)
 }
